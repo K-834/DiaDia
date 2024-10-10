@@ -40,6 +40,20 @@
                             Productos</a></li>
                     </ul>
                 </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                       aria-expanded="false">
+                        <i class="bi bi-basket"></i>&nbsp; Categoria
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item"
+                               href="/BodegaJavaWeb/admin/admin_categorias.jsp">Visualizar Categoria</a></li>
+                        <li><a class="dropdown-item"
+                               href="/BodegaJavaWeb/admin/admin_categorias_agregar.jsp">Agregar Categorias</a></li>
+                    </ul>
+                </li>
+
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                        aria-expanded="false">
@@ -61,7 +75,7 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item"
-                               href="/BodegaJavaWeb/admin/admin_home_graficos.jsp">Visualizar Gr·ficos</a>
+                               href="/BodegaJavaWeb/admin/admin_home_graficos.jsp">Visualizar Gr√°ficos</a>
                         </li>
                     </ul>
                 </li>
