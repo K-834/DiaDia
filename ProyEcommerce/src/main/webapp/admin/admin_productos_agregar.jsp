@@ -53,9 +53,9 @@
                                         <label for="txtCateProd" class="form-label">Marca del Producto:</label>
                                         <select class="form-select" aria-label="Default select example" id="txtCateProd"
                                                 name="producto-categoria">
-                                            <option selected value="esika">esika</option>
-                                            <option value="Lbel">Lbel</option>
-                                            <option value="cyzone">Cyzone</option>
+                                            <option selected value="Alimentos">Alimentos</option>
+                                            <option value="Cuidado del Hogar">Cuidado del Hogar</option>
+                                            <option value="Cuidado personal">Cuidado personal</option>
                                         </select>
                                     </div>
                                 </div>

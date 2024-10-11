@@ -45,7 +45,7 @@ String cyzoneStockArray = cyzoneStock.toString();
     var option = {
         color: ['#80FFA5', '#00DDFF', '#37A2FF'],
         title: {
-            text: 'TABLA DE STOCK CATEGORIA PERFUMES'
+            text: 'TABLA DE STOCK CATEGORIA PRODUCTOS'
         },
         tooltip: {
             trigger: 'axis',

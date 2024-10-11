@@ -5,7 +5,7 @@
 --%>
 
 <nav class="categorias">
-            <button data-categoria="esika">Esika</button>
-            <button data-categoria="Lbel">L'bel</button>
-            <button data-categoria="cyzone">Cyzone</button>
+            <button data-categoria="Alimentos">Alimentos</button>
+            <button data-categoria="Cuidado del Hogar">Cuidado del Hogar</button>
+            <button data-categoria="Cuidado personal">Cuidado personal</button>
 </nav>

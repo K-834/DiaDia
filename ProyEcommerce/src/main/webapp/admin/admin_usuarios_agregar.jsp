@@ -30,19 +30,19 @@
                             <div class="infoUser" style="display: grid; grid-template-columns: 50% 50%;">
                                 <div class="mb-3 me-2">
                                     <label for="txtNombre" class="form-label">Nombre</label>
-                                    <input type="text" name="nombre" required class="form-control border-secondary-subtle" id="txtNombre">
+                                    <input type="text" name="nombre" pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+" title="El nombre solo debe contener letras y espacios" required class="form-control border-secondary-subtle" id="txtNombre">
                                 </div>
                                 <div class="mb-3 ms-2">
                                     <label for="txtApellido" class="form-label">Apellido</label>
-                                    <input type="text" name="apellido" required class="form-control border-secondary-subtle" id="txtApellido">
+                                    <input type="text" name="apellido" pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+" title="El apellido solo debe contener letras y espacios" required class="form-control border-secondary-subtle" id="txtApellido">
                                 </div>
                                 <div class="mb-3 me-2">
                                     <label for="txtDocumento" class="form-label">Documento</label>
-                                    <input type="text" name="documento" pattern="[0-9]{8}" required class="form-control border-secondary-subtle" id="txtDocumento">
+                                    <input type="text" name="documento" pattern="[0-9]{8}" title="El documento solo debe contener 9 caracteres de longitud" required class="form-control border-secondary-subtle" id="txtDocumento">
                                 </div>
                                 <div class="mb-3 ms-2">
                                     <label for="txtTelefono" class="form-label">Teléfono</label>
-                                    <input type="text" name="telefono" required class="form-control border-secondary-subtle" id="txtTelefono">
+                                    <input type="text" name="telefono" pattern="[0-9]{9}" title="El teléfono solo debe contener 9 caracteres de longitud" required class="form-control border-secondary-subtle" id="txtTelefono">
                                 </div>
                             </div>
                             <div class="mb-3">
