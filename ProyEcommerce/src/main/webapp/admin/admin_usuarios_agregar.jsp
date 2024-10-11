@@ -38,7 +38,7 @@
                                 </div>
                                 <div class="mb-3 me-2">
                                     <label for="txtDocumento" class="form-label">Documento</label>
-                                    <input type="text" name="documento" pattern="[0-9]{8}" title="El documento solo debe contener 9 caracteres de longitud" required class="form-control border-secondary-subtle" id="txtDocumento">
+                                    <input type="text" name="documento" pattern="[0-9]{8}" title="El documento solo debe contener 8 caracteres de longitud" required class="form-control border-secondary-subtle" id="txtDocumento">
                                 </div>
                                 <div class="mb-3 ms-2">
                                     <label for="txtTelefono" class="form-label">Teléfono</label>
