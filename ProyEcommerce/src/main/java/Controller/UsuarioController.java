@@ -85,8 +85,12 @@ public class UsuarioController extends HttpServlet {
 
                 if(usuario.getCorreo() != null){
                     misesion.setAttribute("usuario", usuario);
+                     CategoriaController categoriaController = new CategoriaController();
+            List<Categoria> listaCategorias = categoriaController.obtenerCategorias();
+            misesion.setAttribute("listaCategorias", listaCategorias);
                     request.getRequestDispatcher("productos.jsp").forward(request, response);
                    //request.getRequestDispatcher("admin/admin_home.jsp").forward(request, response);
+                   
                    
                 }
                 else {
