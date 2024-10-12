@@ -50,7 +50,7 @@
                                                class="form-control border-secondary-subtle" id="txtDescProd">
                                     </div>
                                       <div class="mb-3 me-4">
-                                        <label for="txtCateProd" class="form-label">Marca del Producto:</label>
+                                        <label for="txtCateProd" class="form-label">Categoria del Producto:</label>
                                         <select class="form-select" aria-label="Selecciona una categoría" id="txtCateProd" name="producto-categoria">
                                             <option selected disabled value="">Selecciona una categoría</option>
                                             <c:forEach var="categoria" items="${listaCategorias}">

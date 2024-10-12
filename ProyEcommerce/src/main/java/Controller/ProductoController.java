@@ -41,11 +41,12 @@ public class ProductoController extends HttpServlet {
 
         switch (action) {
             case "load":
-                 List<Producto> listaProductos = model.obtenerProductos();
-                List<Categoria> listaCategorias = model.obtenerCategorias(); 
-                
-                request.setAttribute("listaCategorias", listaCategorias); 
+                List<Producto> listaProductos = model.obtenerProductos();
+                List<Categoria> listaCategorias = model.obtenerCategorias();
+
+                request.setAttribute("listaCategorias", listaCategorias);
                 HttpSession misesion = request.getSession();
+
                 misesion.setAttribute("listaProductos", listaProductos);
                 request.getRequestDispatcher("productos.jsp").forward(request, response);
                 break;
@@ -142,6 +143,12 @@ public class ProductoController extends HttpServlet {
 
                                     request.getRequestDispatcher("admin/admin_productos.jsp").forward(request, response);
                                 } else {
+                                    CategoriaController categoriaController = new CategoriaController();
+                                    List<Categoria> listaCategorias = categoriaController.obtenerCategorias();
+
+                                    // Agregar la lista de categorías al objeto request
+                                    request.setAttribute("listaCategorias", listaCategorias);
+
                                     request.getRequestDispatcher("admin/admin_productos_editar.jsp?productoid=" + id).forward(request, response);
                                 }
                             }

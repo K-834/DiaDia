@@ -1,3 +1,4 @@
+<%@page import="Entity.CarritoItem"%>
 <%@page import="Entity.Usuario"%>
 <%
     Usuario usuario = (Usuario)session.getAttribute("usuario");
@@ -26,7 +27,7 @@
             <input type="text" name="buscador-txt" id="producto-buscado" placeholder="Buscar productos...">
         </div>
         <% if(usuario != null) {%>
-            <a href="carrito.jsp" class="carrito" id="carrito-header" ><i class="bi bi-cart2"></i></a>
+        <a href="carrito.jsp" class="carrito" id="carrito-header" ><i class="bi bi-cart2"></i></a>
             <a href="perfil.jsp" class="user"><i class="bi bi-person-circle"></i></a>
         <% } else { %>
             <button class="carrito" id="carrito-header" data-login="login"><i class="bi bi-cart2" data-login="login"></i></button>

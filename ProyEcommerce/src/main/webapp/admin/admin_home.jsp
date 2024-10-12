@@ -1,8 +1,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@page import="Entity.Usuario"%>
-<%
-        Usuario usuario = (Usuario) session.getAttribute("usuario");
-
+<% 
+    Usuario usuario = (Usuario) session.getAttribute("usuario");
+    if (usuario == null) {
+        request.getRequestDispatcher("index.jsp").forward(request, response);
+        return; 
+    }
 %>
 <html>
     <head>
@@ -19,8 +22,6 @@
                 background-position: center;
                 background-attachment: fixed;
             }
-
-
         </style>
     </head>
     <body>
@@ -54,9 +55,8 @@
                     <hr>
                     <small class="text-justify">Confirma el estado de un pedido y realiza el seguimiento de las compras</small>
                     <a href="/BodegaJavaWeb/admin/admin_pedidos.jsp" class="btn btn-primary mt-3">Revisar Pedidos</a>
-                    <a href="/BodegaJavaWeb/ProductoController?action=load" class="btn btn-success" style="margin-top: 1rem; margin-bottom: 1rem" >Agregar nuevo Pedido</a>
+                    <a href="/BodegaJavaWeb/ProductoController?action=load" class="btn btn-success" style="margin-top: 1rem; margin-bottom: 1rem">Agregar nuevo Pedido</a>
                 </div>
-
 
                 <div class="col text-bg-danger p-3" style="border-top-right-radius: 1rem; border-bottom-right-radius: 1rem;">
                     <h5>Gráficos</h5>

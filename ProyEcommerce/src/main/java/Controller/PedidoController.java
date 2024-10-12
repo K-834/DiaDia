@@ -21,15 +21,14 @@ public class PedidoController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         String admin = (String) request.getParameter("admin");
-        int pedidoId = Integer.parseInt((String)request.getParameter("pedidoid"));
+        int pedidoId = Integer.parseInt((String) request.getParameter("pedidoid"));
         Pedido pedido = model.obtenerPedido(pedidoId);
         HttpSession session = request.getSession();
         session.setAttribute("pedido", pedido);
 
-        if(admin != null) {
+        if (admin != null) {
             request.getRequestDispatcher("admin/admin_pedidos_detalle.jsp").forward(request, response);
-        }
-        else {
+        } else {
             request.getRequestDispatcher("detallepedido.jsp").forward(request, response);
         }
 
@@ -57,7 +56,7 @@ public class PedidoController extends HttpServlet {
                 String responsableNombre = (String) request.getParameter("responsable-nombre");
                 String numeroTarjetaPago = (String) request.getParameter("numero-tarjeta-pago");
                 double totalPago = Double.parseDouble((String) request.getParameter("total-pago"));
-                String codigoUnico = UUID.randomUUID().toString().replace("-","").substring(0, 10);
+                String codigoUnico = UUID.randomUUID().toString().replace("-", "").substring(0, 10);
 
                 double subtotalPago = (metodoEnvio == 1) ? totalPago * 0.82 : (totalPago - 5.00) * 0.82;
                 double envioPago = (metodoEnvio == 1) ? 0.00 : 5.00;
@@ -66,13 +65,13 @@ public class PedidoController extends HttpServlet {
                 String reciboTipo = (String) request.getParameter("tipo-comprobante");
                 String ruc = (String) request.getParameter("numero-ruc");
 
-                if(model.crearPedido(fechaPedido, usuarioId, metodoEnvio, direccionEntrega, fechaEntrega, horaEntrega,
+                if (model.crearPedido(fechaPedido, usuarioId, metodoEnvio, direccionEntrega, fechaEntrega, horaEntrega,
                         responsableDocumento, responsableNombre, reciboTipo, ruc, numeroTarjetaPago, subtotalPago,
                         envioPago, igvPago, totalPago, codigoUnico, estado)) {
 
                     int idPedido = model.obtenerIdPedido(codigoUnico);
 
-                    for(CarritoItem item : carrito.obtenerItems()) {
+                    for (CarritoItem item : carrito.obtenerItems()) {
                         Producto producto = cProductos.obtenerProducto(item.getId());
                         int productoId = producto.getId();
                         int cantidad = item.getCantidad();
@@ -90,21 +89,26 @@ public class PedidoController extends HttpServlet {
                     session.setAttribute("pedido", pedido);
 
                     request.getRequestDispatcher("success.jsp").forward(request, response);
-                }
-                else {
+                } else {
                     request.getRequestDispatcher("pedido.jsp").forward(request, response);
                 }
                 break;
             case "actualizar-estado":
                 int pedidoId = Integer.parseInt(request.getParameter("pedido-id"));
-                if(model.actualizarEstadoPedido(pedidoId, estado)){
-                    Pedido pedido = (Pedido) request.getSession().getAttribute("pedido");
-                    pedido.setEstado(estado);
-                    session.setAttribute("pedido", pedido);
-                    request.getRequestDispatcher("admin/admin_pedidos_detalle.jsp?pedidoid="+pedidoId).forward(request, response);
-                }
-                else {
-                    request.getRequestDispatcher("admin/admin_pedidos_detalle.jsp?pedidoid="+pedidoId).forward(request, response);
+                String vista = (String) request.getParameter("vista");
+                if (model.actualizarEstadoPedido(pedidoId, estado)) {
+
+                    if (vista.equals("extra")) {
+                        request.getRequestDispatcher("perfil.jsp").forward(request, response);
+                    } else {
+                        Pedido pedido = (Pedido) request.getSession().getAttribute("pedido");
+                        pedido.setEstado(estado);
+                        session.setAttribute("pedido", pedido);
+                        request.getRequestDispatcher("admin/admin_pedidos_detalle.jsp?pedidoid=" + pedidoId).forward(request, response);
+                    }
+
+                } else {
+                    request.getRequestDispatcher("admin/admin_pedidos_detalle.jsp?pedidoid=" + pedidoId).forward(request, response);
                 }
                 break;
         }

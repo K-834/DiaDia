@@ -9,6 +9,9 @@
     font-size: 20px;
 }
 
+body{
+    background: no-repeat center/100% url("assets/img/fondo/diadia_Fondo2.jpg");
+}
 
 .top{
     text-align: center;

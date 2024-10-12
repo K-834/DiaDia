@@ -43,14 +43,15 @@
                 <form action="/BodegaJavaWeb/PedidoController" method="POST" class="p-4">
                     <input hidden="hidden" type="text" name="action" value="actualizar-estado">
                     <input hidden="hidden" type="text" name="pedido-id" value="<%=pedido.getId()%>">
+                    <input hidden="hidden" type="text" name="vista" value="in">
                     <div class="mb-3">
                         <label for="estadoPedido" class="form-label">Estado de Pedido</label>
                         <select class="form-select" id="estadoPedido" name="estado-pedido" aria-describedby="emailHelp">
-                            <% String[] estados = {"EN PROCESO", "LISTO PARA RECOGER", "ENTREGADO"}; %>
-                            <% for(String estado : estados) { %>
-                                <% String selected = (pedido.getEstado().equals(estado)) ? "selected" : "";%>
-                                <option <%=selected%> value="<%=estado%>"><%=estado%></option>
-                            <% } %>
+                            <% String[] estados = {"EN PROCESO", "LISTO PARA RECOGER", "ENTREGADO", "CANCELADO"}; %>
+                            <% for (String estado : estados) { %>
+                            <% String selected = (pedido.getEstado().equals(estado)) ? "selected" : "";%>
+                            <option <%=selected%> value="<%=estado%>"><%=estado%></option>
+                            <% }%>
                         </select>
                         <div id="emailHelp" class="form-text">Actualiza el estado del pedido</div>
                     </div>
@@ -126,19 +127,19 @@
                                 </div>
                                 <div class="mb-3 me-4">
                                     <label for="txtSubtotal" class="form-label">Precio Subtotal:</label>
-                                    <input type="text" id="txtSubtotal" disabled value="<%=String.format("%.2f",pedido.getSubTotalPago())%>" class="form-control" >
+                                    <input type="text" id="txtSubtotal" disabled value="<%=String.format("%.2f", pedido.getSubTotalPago())%>" class="form-control" >
                                 </div>
                                 <div class="mb-3 me-4">
                                     <label for="txtEnvio" class="form-label">Precio Envio:</label>
-                                    <input type="text" id="txtEnvio" disabled value="<%=String.format("%.2f",pedido.getEnvioPago())%>" class="form-control" >
+                                    <input type="text" id="txtEnvio" disabled value="<%=String.format("%.2f", pedido.getEnvioPago())%>" class="form-control" >
                                 </div>
                                 <div class="mb-3 me-4">
                                     <label for="txtIGV" class="form-label">Precio IGV:</label>
-                                    <input type="text" id="txtIGV" disabled value="<%=String.format("%.2f",pedido.getIgvPago())%>" class="form-control" >
+                                    <input type="text" id="txtIGV" disabled value="<%=String.format("%.2f", pedido.getIgvPago())%>" class="form-control" >
                                 </div>
                                 <div class="mb-3 me-4">
                                     <label for="txtTotal" class="form-label">Precio Total:</label>
-                                    <input type="text" id="txtTotal" disabled value="<%=String.format("%.2f",pedido.getTotalPago())%>" class="form-control" >
+                                    <input type="text" id="txtTotal" disabled value="<%=String.format("%.2f", pedido.getTotalPago())%>" class="form-control" >
                                 </div>
 
                             </div>
@@ -158,18 +159,18 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <% for(DetallePedido detalle : detallesPedido) { %>
-                                    <% Producto producto = cProducto.obtenerProducto(detalle.getProductoId()); %>
-                                        <tr>
-                                            <td>
-                                                <img width="50" src="/BodegaJavaWeb/ImgController?id=<%=producto.getId()%>" alt="<%=producto.getDescripcion()%>">
-                                            </td>
-                                            <td><%=producto.getDescripcion()%></td>
-                                            <td>S/ <%=String.format("%.2f", detalle.getPrecio())%></td>
-                                            <td><%=detalle.getCantidad()%></td>
-                                            <td>S/ <%=String.format("%.2f", detalle.getSubtotal())%></td>
-                                        </tr>
-                                    <% } %>
+                                    <% for (DetallePedido detalle : detallesPedido) { %>
+                                    <% Producto producto = cProducto.obtenerProducto(detalle.getProductoId());%>
+                                    <tr>
+                                        <td>
+                                            <img width="50" src="/BodegaJavaWeb/ImgController?id=<%=producto.getId()%>" alt="<%=producto.getDescripcion()%>">
+                                        </td>
+                                        <td><%=producto.getDescripcion()%></td>
+                                        <td>S/ <%=String.format("%.2f", detalle.getPrecio())%></td>
+                                        <td><%=detalle.getCantidad()%></td>
+                                        <td>S/ <%=String.format("%.2f", detalle.getSubtotal())%></td>
+                                    </tr>
+                                    <% }%>
                                 </tbody>
                             </table>
                         </div>

@@ -8,17 +8,6 @@ import Entity.Categoria;
 import Entity.Producto;
 import Entity.Usuario;
 import Model.CategoriaModel;
-import Model.ProductoModel;
-import java.io.ByteArrayOutputStream;
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
-
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -37,74 +26,82 @@ import javax.servlet.http.HttpSession;
 public class CategoriaController extends HttpServlet {
 
     CategoriaModel model = new CategoriaModel();
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
+
     }
 
-    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String action = (String) request.getParameter("action");
         String categoriaid = request.getParameter("categoriaid");
-        
-        
 
         switch (action) {
             case "load":
-                List<Categoria> listaCategorias = model.obtenerCategorias(); 
+                List<Categoria> listaCategorias = model.obtenerCategorias();
                 HttpSession misesion = request.getSession();
-                misesion.setAttribute("listaCategorias", listaCategorias); 
-                request.getRequestDispatcher("categorias.jsp").forward(request, response); 
+                misesion.setAttribute("listaCategorias", listaCategorias);
+                request.getRequestDispatcher("categorias.jsp").forward(request, response);
+                break;
+            case "edit": // Nueva acción para cargar el producto y categorías
+                int productId = Integer.parseInt(request.getParameter("productoid"));
+                ProductoController productoController = new ProductoController(); // Asegúrate de que tienes este controlador
+                Producto producto = productoController.obtenerProducto(productId);
+
+                // Cargar categorías
+                listaCategorias = model.obtenerCategorias();
+                request.setAttribute("producto", producto); // Agrega el producto a la request
+                request.setAttribute("listaCategorias", listaCategorias); // Agrega la lista de categorías a la request
+                request.getRequestDispatcher("ruta/a/tu/jsp.jsp").forward(request, response); // Cambia por la ruta correcta
                 break;
             case "delete":
-   
-              if (model.eliminarCategoria(Integer.parseInt(categoriaid))) {
+
+                if (model.eliminarCategoria(Integer.parseInt(categoriaid))) {
                     request.getRequestDispatcher("admin/admin_categorias.jsp").forward(request, response);
                 } else {
                     request.getRequestDispatcher("admin/admin_categorias.jsp").forward(request, response);
-                }   
-    break;
+                }
+                break;
 
         }
     }
 
-   
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-             try {
-        String action = request.getParameter("action");
-        int id = Integer.parseInt(request.getParameter("categoria-id") != null ? request.getParameter("categoria-id") : "0");
-        String nombre = request.getParameter("categoria-nombre");
-        String descripcion = request.getParameter("categoria-descripcion");
 
-        switch (action) {
-            case "agregar-categoria":
-                if (model.agregarCategoria(nombre, descripcion)) {
-                     List<Categoria> listaCategorias = model.obtenerCategorias();
-                    HttpSession misesion = request.getSession();
-                    misesion.setAttribute("listaCategorias", listaCategorias);
-                    request.getRequestDispatcher("admin/admin_categorias.jsp").forward(request, response);
-                } else {
-                    request.getRequestDispatcher("admin/admin_categorias_agregar.jsp").forward(request, response);
-                }
-                break;
+        try {
+            String action = request.getParameter("action");
+            int id = Integer.parseInt(request.getParameter("categoria-id") != null ? request.getParameter("categoria-id") : "0");
+            String nombre = request.getParameter("categoria-nombre");
+            String descripcion = request.getParameter("categoria-descripcion");
 
-            case "editar-categoria":
-                if (model.editarCategoria(id, nombre, descripcion)) {
-                    request.getRequestDispatcher("admin/admin_categorias.jsp").forward(request, response);
-                } else {
-                    request.getRequestDispatcher("admin/admin_categorias_editar.jsp?categoriaid=" + id).forward(request, response);
-                }
-                break;
+            switch (action) {
+                case "agregar-categoria":
+                    if (model.agregarCategoria(nombre, descripcion)) {
+                        List<Categoria> listaCategorias = model.obtenerCategorias();
+                        HttpSession misesion = request.getSession();
+                        misesion.setAttribute("listaCategorias", listaCategorias);
+                        request.getRequestDispatcher("admin/admin_categorias.jsp").forward(request, response);
+                    } else {
+                        request.getRequestDispatcher("admin/admin_categorias_agregar.jsp").forward(request, response);
+                    }
+                    break;
+
+                case "editar-categoria":
+                    if (model.editarCategoria(id, nombre, descripcion)) {
+                        request.getRequestDispatcher("admin/admin_categorias.jsp").forward(request, response);
+                    } else {
+                        request.getRequestDispatcher("admin/admin_categorias_editar.jsp?categoriaid=" + id).forward(request, response);
+                    }
+                    break;
+            }
+        } catch (Exception e) {
+            response.getWriter().write("Error en el procesamiento del formulario: " + e.getMessage());
         }
-    } catch (Exception e) {
-        response.getWriter().write("Error en el procesamiento del formulario: " + e.getMessage());
-    }
     }
 
     @Override
@@ -121,4 +118,3 @@ public class CategoriaController extends HttpServlet {
     }
 
 }
-
