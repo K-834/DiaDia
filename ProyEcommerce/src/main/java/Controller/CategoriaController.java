@@ -49,6 +49,8 @@ public class CategoriaController extends HttpServlet {
             throws ServletException, IOException {
         String action = (String) request.getParameter("action");
         String categoriaid = request.getParameter("categoriaid");
+        
+        
 
         switch (action) {
             case "load":
@@ -83,6 +85,9 @@ public class CategoriaController extends HttpServlet {
         switch (action) {
             case "agregar-categoria":
                 if (model.agregarCategoria(nombre, descripcion)) {
+                     List<Categoria> listaCategorias = model.obtenerCategorias();
+                    HttpSession misesion = request.getSession();
+                    misesion.setAttribute("listaCategorias", listaCategorias);
                     request.getRequestDispatcher("admin/admin_categorias.jsp").forward(request, response);
                 } else {
                     request.getRequestDispatcher("admin/admin_categorias_agregar.jsp").forward(request, response);
@@ -116,3 +121,4 @@ public class CategoriaController extends HttpServlet {
     }
 
 }
+
