@@ -1,5 +1,6 @@
 package Controller;
 
+import Entity.Categoria;
 import Entity.Producto;
 import Entity.Usuario;
 import Model.ProductoModel;

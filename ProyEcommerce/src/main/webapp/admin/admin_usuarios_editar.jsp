@@ -41,13 +41,13 @@
                         <div class="mb-3 row">
                             <label for="txtNames" class="col-sm-2 col-form-label">Nombre</label>
                             <div class="col-sm-10">
-                                <input type="text" name="nombre" class="form-control" id="txtNames" value="<%=usuario.getNombre()%>">
+                                <input type="text" name="nombre" pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+" title="El nombre solo debe contener letras y espacios" class="form-control" id="txtNames" value="<%=usuario.getNombre()%>">
                             </div>
                         </div>
                         <div class="mb-3 row">
                             <label for="txtApellido" class="col-sm-2 col-form-label">Apellido</label>
                             <div class="col-sm-10">
-                                <input type="text" name="apellido" class="form-control" id="txtApellido" value="<%=usuario.getApellido()%>">
+                                <input type="text" name="apellido" pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+" title="El apellido solo debe contener letras y espacios" class="form-control" id="txtApellido" value="<%=usuario.getApellido()%>">
                             </div>
                         </div>
                         <div class="mb-3 row">
@@ -59,13 +59,13 @@
                         <div class="mb-3 row">
                             <label for="txtDocumento" class="col-sm-2 col-form-label">Documento</label>
                             <div class="col-sm-10">
-                                <input type="text" name="documento" pattern="[0-9]{8}" class="form-control" id="txtDocumento" value="<%=(usuario.getDocumentoNumero() != null) ? usuario.getDocumentoNumero() : ""%>">
+                                <input type="text" name="documento" pattern="[0-9]{8}" title="El documento solo debe contener 8 caracteres de longitud" class="form-control" id="txtDocumento" value="<%=(usuario.getDocumentoNumero() != null) ? usuario.getDocumentoNumero() : ""%>">
                             </div>
                         </div>
                         <div class="mb-3 row">
                             <label for="txtTelefono" class="col-sm-2 col-form-label">Telefono</label>
                             <div class="col-sm-10">
-                                <input type="text" name="telefono" pattern="[0-9]{3,}" class="form-control" id="txtTelefono" value="<%=(usuario.getTelefono() != null) ? usuario.getTelefono() : ""%>">
+                                <input type="text" name="telefono" pattern="[0-9]{9}" title="El teléfono solo debe contener 9 caracteres de longitud" class="form-control" id="txtTelefono" value="<%=(usuario.getTelefono() != null) ? usuario.getTelefono() : ""%>">
                             </div>
                         </div>
                         <div>

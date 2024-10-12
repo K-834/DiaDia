@@ -1,6 +1,7 @@
 package Controller;
 
 import Config.Encryptor;
+import Entity.Categoria;
 import Entity.Usuario;
 import Model.UsuarioModel;
 import java.io.IOException;
