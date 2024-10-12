@@ -49,13 +49,13 @@
                                         <input type="text" name="producto-descripcion" required
                                                class="form-control border-secondary-subtle" id="txtDescProd">
                                     </div>
-                                    <div class="mb-3 me-4">
+                                      <div class="mb-3 me-4">
                                         <label for="txtCateProd" class="form-label">Marca del Producto:</label>
-                                        <select class="form-select" aria-label="Default select example" id="txtCateProd"
-                                                name="producto-categoria">
-                                            <option selected value="Alimentos">Alimentos</option>
-                                            <option value="Cuidado del Hogar">Cuidado del Hogar</option>
-                                            <option value="Cuidado personal">Cuidado personal</option>
+                                        <select class="form-select" aria-label="Selecciona una categoría" id="txtCateProd" name="producto-categoria">
+                                            <option selected disabled value="">Selecciona una categoría</option>
+                                            <c:forEach var="categoria" items="${listaCategorias}">
+                                                <option value="${categoria.id}">${categoria.nombre}</option>
+                                            </c:forEach>
                                         </select>
                                     </div>
                                 </div>
