@@ -31,32 +31,36 @@
                     <% if(carrito != null) { %>
                         <% for(CarritoItem item : carrito.obtenerItems()) { %>
                             <% Producto producto = cProductos.obtenerProducto(item.getId()); %>
-                            <% double currentSubtotal =  producto.getPrecio() * item.getCantidad(); %>
-                            <% precioTotal += currentSubtotal; %>
-                            <div class="producto">
-                                <div class="imagen">
-                                    <img src="ImgController?id=<%=producto.getId()%>" alt="<%=producto.getDescripcion()%>">
-                                </div>
-                                <div class="info">
-                                    <p class="nombre"><%=producto.getNombre()%></p>
-                                    <p class="marca"><%=producto.getProveedor()%></p>
-                                    <div class="precio">
-                                        <p class="unidad">S/<span><%=String.format("%.2f", producto.getPrecio())%></span></p>
-                                        <div class="acumulado">
-                                            <p class="subtitulo">subtotal:</p>
-                                            <p class="subtotal">S/<span><%=String.format("%.2f", currentSubtotal)%></span></p>
+                            <% if (producto != null) { %> 
+                                <% double currentSubtotal =  producto.getPrecio() * item.getCantidad(); %>
+                                <% precioTotal += currentSubtotal; %>
+                                <div class="producto">
+                                    <div class="imagen">
+                                        <img src="ImgController?id=<%=producto.getId()%>" alt="<%=producto.getDescripcion()%>">
+                                    </div>
+                                    <div class="info">
+                                        <p class="nombre"><%=producto.getNombre()%></p>
+                                        <p class="marca"><%=producto.getProveedor()%></p>
+                                        <div class="precio">
+                                            <p class="unidad">S/<span><%=String.format("%.2f", producto.getPrecio())%></span></p>
+                                            <div class="acumulado">
+                                                <p class="subtitulo">subtotal:</p>
+                                                <p class="subtotal">S/<span><%=String.format("%.2f", currentSubtotal)%></span></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="ux">
+                                        <button class="btn-remove"><i class="bi bi-trash3-fill" data-remove="remove" data-id="<%=producto.getId()%>"></i></button>
+                                        <div class="quantity">
+                                            <button class="btn-sub" data-sub="sub" data-id="<%=producto.getId()%>">-</button>
+                                            <p class="num"><%=item.getCantidad()%></p>
+                                            <button class="btn-add" data-add="add" data-id="<%=producto.getId()%>">+</button>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="ux">
-                                    <button class="btn-remove"><i class="bi bi-trash3-fill" data-remove="remove" data-id="<%=producto.getId()%>"></i></button>
-                                    <div class="quantity">
-                                        <button class="btn-sub" data-sub="sub" data-id="<%=producto.getId()%>">-</button>
-                                        <p class="num"><%=item.getCantidad()%></p>
-                                        <button class="btn-add" data-add="add" data-id="<%=producto.getId()%>">+</button>
-                                    </div>
-                                </div>
-                            </div>
+                            <% } else { %>
+                                <p>Producto con ID <%=item.getId()%> no encontrado.</p> <!-- Mensaje en caso de que no se encuentre el producto -->
+                            <% } %>
                         <% } %>
                     <% } %>
                 </div>
