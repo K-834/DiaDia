@@ -1,11 +1,15 @@
-<%-- 
-    Document   : _nav
-    Created on : 19 oct. 2023, 00:14:18
-    Author     : antho
---%>
+<%@page import="Entity.Categoria"%>
+<%@page import="java.util.List"%>
+<%
+    List<Categoria> listaCategorias = (List<Categoria>) session.getAttribute("listaCategorias");
+    
+%>
 
-<nav class="categorias">
-            <button data-categoria="Alimentos">Alimentos</button>
-            <button data-categoria="Cuidado del Hogar">Cuidado del Hogar</button>
-            <button data-categoria="Cuidado personal">Cuidado personal</button>
+
+ <nav class="categorias">
+    <c:forEach var="categoria" items="${listaCategorias}">
+        <a href="productos.jsp?categoria=${categoria.nombre}">
+            <button>${categoria.nombre}</button>
+        </a>
+    </c:forEach>
 </nav>
