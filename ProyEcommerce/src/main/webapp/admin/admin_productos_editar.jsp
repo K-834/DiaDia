@@ -76,7 +76,7 @@
                             <div class="col-sm-10">
                                 <select class="form-select" id="txtCateProd" name="producto-categoria" required>
                                     <c:forEach var="categoria" items="${listaCategorias}">
-                                        <option value="${categoria.id}">${categoria.nombre}</option>
+                                        <option value="${categoria.nombre}">${categoria.nombre}</option>
                                     </c:forEach>
                                 </select>
                             </div>
@@ -94,7 +94,7 @@
                         <div class="mb-3 row">
                             <label for="txtCostProd" class="col-sm-2 col-form-label">Precio</label>
                             <div class="col-sm-10">
-                                <input type="text" name="producto-precio" class="form-control" id="txtCostProd" pattern="^[0-9]+(\.[0-9]{1,2})?$" value="<%= String.format("%.2f", producto.getPrecio())%>" required>
+                                <input type="text" name="producto-precio" class="form-control" id="txtCostProd" pattern="^\d*\.?\d+$" value="<%= String.format("%.2f", producto.getPrecio())%>" required>
                             </div>
                         </div>
 
@@ -102,7 +102,7 @@
                         <div class="mb-3 row">
                             <label for="txtCantProd" class="col-sm-2 col-form-label">Stock</label>
                             <div class="col-sm-10">
-                                <input type="number" name="producto-stock" class="form-control" id="txtCantProd" min="0" max="100" value="<%= producto.getStock()%>" required>
+                                <input type="number" name="producto-stock" class="form-control" id="txtCantProd" min="0" max="1000" value="<%= producto.getStock()%>" required>
                             </div>
                         </div>
 

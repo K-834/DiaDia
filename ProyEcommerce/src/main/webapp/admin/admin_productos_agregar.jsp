@@ -54,7 +54,7 @@
                                         <select class="form-select" aria-label="Selecciona una categoría" id="txtCateProd" name="producto-categoria">
                                             <option selected disabled value="">Selecciona una categoría</option>
                                             <c:forEach var="categoria" items="${listaCategorias}">
-                                                <option value="${categoria.id}">${categoria.nombre}</option>
+                                                <option value="${categoria.nombre}">${categoria.nombre}</option>
                                             </c:forEach>
                                         </select>
                                     </div>

@@ -7,11 +7,11 @@ List<Integer> lbelStock = new ArrayList<>();
 List<Integer> cyzoneStock = new ArrayList<>();
 
 for (Producto p: productos){
-    if(p.getCategoria().equalsIgnoreCase("esika")){
+    if(p.getCategoria().equalsIgnoreCase("Alimentos")){
         esikaStock.add(p.getStock());
-    } else if(p.getCategoria().equalsIgnoreCase("Lbel")){
+    } else if(p.getCategoria().equalsIgnoreCase("Cuidado del Hogar")){
         lbelStock.add(p.getStock());
-    } else if(p.getCategoria().equalsIgnoreCase("cyzone")){
+    } else if(p.getCategoria().equalsIgnoreCase("Cuidado personal")){
         cyzoneStock.add(p.getStock());
     }
 }
@@ -71,7 +71,7 @@ String cyzoneStockArray = cyzoneStock.toString();
             {
                 type: 'category',
                 boundaryGap: false,
-                data: ['ESIKA', 'LBEL', 'CYZONE']
+                data: ['Alimentos', 'Cuidado del Hogar', 'Cuidado personal']
             }
         ],
         yAxis: [
@@ -81,7 +81,7 @@ String cyzoneStockArray = cyzoneStock.toString();
         ],
         series: [
             {
-                name: 'ESIKA',
+                name: 'Alimentos',
                 type: 'line',
                 stack: 'Total',
                 smooth: true,
@@ -108,7 +108,7 @@ String cyzoneStockArray = cyzoneStock.toString();
                 data: esikaStock
             },
             {
-                name: 'LBEL',
+                name: 'Cuidado del Hogar',
                 type: 'line',
                 stack: 'Total',
                 smooth: true,
@@ -135,7 +135,7 @@ String cyzoneStockArray = cyzoneStock.toString();
                 data: lbelStock
             },
             {
-                name: 'CYZONE',
+                name: 'Cuidado personal',
                 type: 'line',
                 stack: 'Total',
                 smooth: true,

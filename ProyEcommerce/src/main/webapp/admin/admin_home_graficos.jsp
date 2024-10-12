@@ -60,13 +60,18 @@
                 height: 100%;
                 padding: 10px;
             }
+            #btnDownloadPDF:hover {
+                background-color: rgb(127, 168, 166);
+                border-color: black;
+            }
         </style>
     </head>
     <body>
         <%@include file="admin_header.jsp" %>
         <div id="capture" class="container">
-            <div class="mt-3 w-100">
+            <div class="d-flex justify-content-between align-items-center mt-3 w-100">
                 <h2 class="text-light"> Vista General de Gráficos </h2>
+                <button id="btnDownloadPDF" class="btn btn-light mt-3">Descargar PDF</button>      
             </div>
             <div class="row">
                 <div class="col-6 mt-1">
@@ -82,7 +87,7 @@
                     <%@include file="admin_graficos_usuario_pagototal.jsp" %>
                 </div>
             </div>
-            <button id="btnDownloadPDF" class="btn btn-light mt-3">Descargar PDF</button>
+            
         </div>
         
         <script>
@@ -107,5 +112,5 @@
 
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script>
-    </body>
+    </body>
 </html>
