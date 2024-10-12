@@ -1,6 +1,7 @@
 package Model;
 
 import Config.db;
+import Entity.Categoria;
 import Entity.Producto;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -46,6 +47,25 @@ public class ProductoModel {
             e.printStackTrace();
         }
         return productos;
+    }
+     public List<Categoria> obtenerCategorias() {
+        List<Categoria> categorias = new ArrayList<>();
+        String sql = "SELECT * FROM categoria"; 
+
+        try {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                Categoria categoria = new Categoria();
+                categoria.setId(resultSet.getInt("id")); 
+                categoria.setNombre(resultSet.getString("nombre"));
+                categoria.setDescripcion(resultSet.getString("descripcion")); 
+                categorias.add(categoria);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return categorias;
     }
 
     public Producto obtenerProducto(int id) {
@@ -151,3 +171,4 @@ public class ProductoModel {
     }
 
 }
+
