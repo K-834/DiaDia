@@ -12,11 +12,13 @@
         <div class="bg-black-wall" id="bg-black-wall-finalizacion" data-compraexito="compraexito">
 
         </div>
-        <div class="popup popup-star" id="popup-star">
+         <div class="popup popup-star" id="popup-star" style="height: 40%;">
             <img src="assets/img/pedido/Star.png" alt="star">
             <h1>¡Muchas gracias!</h1>
             <p>tu pedido está siendo procesado</p> 
+            
             <p> "Click" en la pantalla para continuar</p>
+            <p><b style="color: red;">Recuerda que tienes 24 horas</b></p>
+            <p><b style="color: red;">para cancelar tu pedido</b></p>
         </div>
-
 <%@include file="_footer.jsp" %>
