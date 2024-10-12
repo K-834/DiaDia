@@ -110,5 +110,5 @@
             </div>
         </main>
 <script type="text/javascript" src="jspdf.min.js"></script>
-<script type="text/javascript" src="html2canvas.min.js"/script>
+<script type="text/javascript" src="html2canvas.min.js"></script>
 <%@include file="_footer.jsp" %>><
