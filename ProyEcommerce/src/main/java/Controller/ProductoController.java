@@ -12,7 +12,12 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -38,6 +43,7 @@ public class ProductoController extends HttpServlet {
 
         String action = (String) request.getParameter("action");
         String productoid = request.getParameter("productoid");
+        String categoriaNombre = request.getParameter("categoriaNombre");
 
         switch (action) {
             case "load":
@@ -57,6 +63,16 @@ public class ProductoController extends HttpServlet {
                     request.getRequestDispatcher("admin/admin_productos.jsp").forward(request, response);
                 }
                 break;
+            case "filtrarPorCategoria":
+                // Filtra productos por categoría
+                List<Producto> productosFiltrados = model.obtenerProductosPorCategoria(categoriaNombre);
+
+                request.setAttribute("listaProductos", productosFiltrados);
+                request.setAttribute("listaCategorias", model.obtenerCategorias());
+
+                // Redirigir
+                request.getRequestDispatcher("productosFiltrados.jsp").forward(request, response);
+            break;
         }
     }
 
@@ -146,7 +162,7 @@ public class ProductoController extends HttpServlet {
                                     CategoriaController categoriaController = new CategoriaController();
                                     List<Categoria> listaCategorias = categoriaController.obtenerCategorias();
 
-                                    // Agregar la lista de categorías al objeto request
+                                    
                                     request.setAttribute("listaCategorias", listaCategorias);
 
                                     request.getRequestDispatcher("admin/admin_productos_editar.jsp?productoid=" + id).forward(request, response);
@@ -171,6 +187,8 @@ public class ProductoController extends HttpServlet {
             file.delete();
         }
     }
+    
+     
 
     @Override
     public String getServletInfo() {
