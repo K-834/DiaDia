@@ -92,6 +92,35 @@ public class ProductoModel {
         return null;
     }
 
+
+        
+    public List<Producto> obtenerProductosPorCategoria(String categoria) {
+    List<Producto> productos = new ArrayList<>();
+    String sql = "SELECT * FROM productos WHERE categoria = ?";
+
+    try (PreparedStatement statement = connection.prepareStatement(sql)) {
+        statement.setString(1, categoria);
+        try (ResultSet resultSet = statement.executeQuery()) {
+            while (resultSet.next()) {
+                Producto producto = new Producto();
+                producto.setId(resultSet.getInt("id"));
+                producto.setNombre(resultSet.getString("nombre"));
+                producto.setCategoria(resultSet.getString("categoria"));
+                producto.setImagen(resultSet.getBytes("imagen"));
+                producto.setDescripcion(resultSet.getString("descripcion"));
+                producto.setProveedor(resultSet.getString("proveedor"));
+                producto.setPrecio(resultSet.getDouble("precio"));
+                producto.setStock(resultSet.getInt("stock"));
+                productos.add(producto);
+            }
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();  
+    }
+    return productos;
+}
+
+
     public boolean agregarProducto(String nombre, String categoria, byte[] imagen, String descripcion,
             String proveedor, double precio, int stock) {
 
