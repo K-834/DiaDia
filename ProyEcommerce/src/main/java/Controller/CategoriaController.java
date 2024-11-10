@@ -46,16 +46,16 @@ public class CategoriaController extends HttpServlet {
                 misesion.setAttribute("listaCategorias", listaCategorias);
                 request.getRequestDispatcher("categorias.jsp").forward(request, response);
                 break;
-            case "edit": // Nueva acción para cargar el producto y categorías
+            case "edit": 
                 int productId = Integer.parseInt(request.getParameter("productoid"));
-                ProductoController productoController = new ProductoController(); // Asegúrate de que tienes este controlador
+                ProductoController productoController = new ProductoController(); 
                 Producto producto = productoController.obtenerProducto(productId);
 
                 // Cargar categorías
                 listaCategorias = model.obtenerCategorias();
                 request.setAttribute("producto", producto); // Agrega el producto a la request
                 request.setAttribute("listaCategorias", listaCategorias); // Agrega la lista de categorías a la request
-                request.getRequestDispatcher("ruta/a/tu/jsp.jsp").forward(request, response); // Cambia por la ruta correcta
+               
                 break;
             case "delete":
 
@@ -118,3 +118,4 @@ public class CategoriaController extends HttpServlet {
     }
 
 }
+
