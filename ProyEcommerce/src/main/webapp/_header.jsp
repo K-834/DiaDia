@@ -6,6 +6,15 @@
     request.getRequestDispatcher("index.jsp").forward(request, response);
     }
 %>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-788SX13VCY"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-788SX13VCY');
+</script>
 <header>
     <div class="header-left">
         <div class="logo-contenedor">

@@ -29,11 +29,32 @@
                 left: 50%;
                 transform: translateX(-50%);
                 width: 40%;
-                
+
                 z-index: 5; /* Imagen detrás del formulario */
             }
+
+            .alert-container {
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                z-index: 1000; /* Asegúrate de que se superponga correctamente */
+                width: auto;
+                max-width: 300px; /* Controla el tamaño del contenedor del mensaje */
+            }
+
         </style>
     </head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-788SX13VCY"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'G-788SX13VCY');
+    </script>
     <body>
 
     <center>
@@ -42,12 +63,29 @@
         <br>
     </center>
 
+
+
     <div class="bg-black-wall hidden" id="bg-black-wall" data-black="black">
 
     </div>
     <div class="popup popup-login" id="popup-login">
         <img src="assets/img/fondo/Logo_diadia.png" alt="alt"/>
         <form action="UsuarioController" class="form" method="POST" value="login">
+
+
+            <!-- Mostrar el mensaje de error si el login falla -->
+            <%
+                String loginError = request.getParameter("login");
+                if (loginError != null && loginError.equals("fail")) {
+            %>
+            <div class="alert-container">
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    ¡Credenciales incorrectas! Por favor, inténtalo de nuevo.
+                </div>
+            </div>
+            <%
+                }
+            %>
             <br>
             <input hidden type="text" name="action" value="login">
             <input type="email" placeholder="Correo" name="correo" required>
@@ -57,6 +95,10 @@
             <p>¿No tienes cuenta? <span data-registrate="registrate">Regístrate</span></p>
         </form>
     </div>
+
+
+
+
 
     <div class="bg-black-wall hidden" id="bg-black-wall" data-black="black"></div>
 
@@ -77,9 +119,22 @@
         </form>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFyFXRB6ZbOuP2KQv/NBuSGExl4xQ1mEJOH+/R+6P6GZRyfgdfjK6" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhG6QJ2AKXQlL6gskTsJkQQHO9SRWA5z2JpeI5mKOkvoQFsmBY9f5cfvoF9" crossorigin="anonymous"></script>
+
+    <script>
+        window.onload = function () {
+            const alertElement = document.querySelector('.alert');
+            if (alertElement) {
+                setTimeout(function () {
+                    alertElement.classList.remove('show');
+                    alertElement.classList.add('fade');
+                }, 3500);
+            }
+        }
+    </script>
+
     <script src="index.js"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     <script src="script.js"></script>
 </body>
 </html>
