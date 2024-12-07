@@ -81,15 +81,17 @@ public class CategoriaController extends HttpServlet {
 
             switch (action) {
                 case "agregar-categoria":
-                    if (model.agregarCategoria(nombre, descripcion)) {
-                        List<Categoria> listaCategorias = model.obtenerCategorias();
-                        HttpSession misesion = request.getSession();
-                        misesion.setAttribute("listaCategorias", listaCategorias);
-                        request.getRequestDispatcher("admin/admin_categorias.jsp").forward(request, response);
-                    } else {
-                        request.getRequestDispatcher("admin/admin_categorias_agregar.jsp").forward(request, response);
-                    }
-                    break;
+                if (model.agregarCategoria(nombre, descripcion)) {
+                    List<Categoria> listaCategorias = model.obtenerCategorias();
+                    HttpSession misesion = request.getSession();
+                    misesion.setAttribute("listaCategorias", listaCategorias);
+                    request.getRequestDispatcher("admin/admin_categorias.jsp").forward(request, response);
+                } else {
+                    request.setAttribute("errorMessage", "La categoría ya existe."); // Mensaje de error
+                    request.getRequestDispatcher("admin/admin_categorias_agregar.jsp").forward(request, response);
+                }
+                break;
+
 
                 case "editar-categoria":
                     if (model.editarCategoria(id, nombre, descripcion)) {
