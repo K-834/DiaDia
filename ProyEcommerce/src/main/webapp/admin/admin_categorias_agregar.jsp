@@ -50,8 +50,15 @@
                                         <a href="admin_categorias.jsp" class="btn btn-secondary mt-1">Cancelar</a> 
                                     </div>
                                 </div>
-                            </div>
+                                <% if(request.getAttribute("errorMessage") != null) { %>
+                                    <div class="alert alert-danger">
+                                        <%= request.getAttribute("errorMessage") %>
+                                    </div>
+                                <% } %>
 
+
+                            </div>
+                            
                         </form>
                     </div>
                 </div>
