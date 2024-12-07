@@ -2,7 +2,7 @@
 <%@ page import="Entity.CarritoItem" %>
 <%@ page import="Controller.ProductoController" %>
 <%@ page import="Entity.Producto" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <%
     Carrito carrito = (Carrito) request.getSession().getAttribute("carrito");
     ProductoController cProductos = new ProductoController();
@@ -50,7 +50,9 @@
                                         </div>
                                     </div>
                                     <div class="ux">
-                                        <button class="btn-remove"><i class="bi bi-trash3-fill" data-remove="remove" data-id="<%=producto.getId()%>"></i></button>
+                                        <button class="btn-remove" data-remove="remove" data-id="<%=producto.getId()%>">
+                                            <i class="bi bi-trash3-fill"></i>
+                                        </button>
                                         <div class="quantity">
                                             <button class="btn-sub" data-sub="sub" data-id="<%=producto.getId()%>">-</button>
                                             <p class="num"><%=item.getCantidad()%></p>
@@ -77,4 +79,38 @@
             </div>
         </main>
 
-<%@include file="_footer.jsp" %>
+        <%@include file="_footer.jsp" %>
+
+        <script>
+            // AJAX para manejar el incremento de cantidad
+            $(document).on('click', '.btn-add', function() {
+                var idProducto = $(this).data('id');
+                var action = 'add';
+                
+                $.post('CarritoController', { action: action, id: idProducto }, function(response) {
+                    location.reload(); // mostrar el carrito actualizado
+                });
+            });
+
+            // AJAX para manejar la reducción de cantidad
+            $(document).on('click', '.btn-sub', function() {
+                var idProducto = $(this).data('id');
+                var action = 'sub';
+                
+                $.post('CarritoController', { action: action, id: idProducto }, function(response) {
+                    location.reload(); 
+                });
+            });
+
+            // AJAX para eliminar un producto del carrito
+            $(document).on('click', '.btn-remove', function() {
+                var idProducto = $(this).data('id');
+                var action = 'remove';
+
+                $.post('CarritoController', { action: action, id: idProducto }, function(response) {
+                    location.reload(); 
+                });
+            });
+        </script>
+    </body>
+</html>
