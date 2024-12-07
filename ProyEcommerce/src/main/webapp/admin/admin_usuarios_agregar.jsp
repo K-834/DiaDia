@@ -16,6 +16,17 @@
                 background-attachment: fixed;
             }
         </style>
+        <script>
+            function validarContraseña() {
+                var pass = document.getElementById("txtPassword").value;
+                var regex = /^(?=.*[A-Z])(?=.*[\W_])[A-Za-z\d\W_]{8,}$/;
+                if (!regex.test(pass)) {
+                    alert("La contraseña debe tener al menos 8 caracteres, incluyendo minimo una letra mayúscula y un símbolo.");
+                    return false; 
+                }
+                return true;
+            }
+        </script>
     </head>
     <body>
         <%@include file="admin_header.jsp" %>
@@ -25,7 +36,7 @@
                 <h3 class="text-light mb-4">Agregar nuevo usuario</h3>
                 <div class="col-md-4 me-4">
                     <div class="row rounded bg-light" style="box-shadow: -10px 10px 10px rgba(255,255,255,0.5)">
-                        <form class="p-4" action="/BodegaJavaWeb/UsuarioController" method="POST" autocomplete="off">
+                        <form class="p-4" action="/BodegaJavaWeb/UsuarioController" method="POST" autocomplete="off" onsubmit="return validarContraseña()">
                             <input hidden="hidden" type="text" name="action" value="register-admin">
                             <div class="infoUser" style="display: grid; grid-template-columns: 50% 50%;">
                                 <div class="mb-3 me-2">
@@ -59,11 +70,14 @@
                             <div class="mb-3">
                                 <label for="txtPassword" class="form-label">Contraseña:</label>
                                 <input type="password" name="password" required class="form-control border-secondary-subtle" id="txtPassword">
+                                <small class="form-text text-muted">
+                                    La contraseña debe tener al menos 8 caracteres, minimo una letra mayúscula y un símbolo.
+                                </small>
                             </div>
                             <button type="submit" class="btn btn-primary mt-1">Guardar</button>
                             <a href="/BodegaJavaWeb/admin/admin_usuarios.jsp" class="btn btn-secondary mt-1">Cancelar</a>
                             <% if(request.getParameter("invalid") != null) { %>
-                                <div style="color: white; background-color:red; border-radius:10px; margin:10px; text-align:center">El correo ingresado ya está Registrado!</div>
+                                <div style="color: white; background-color:red; border-radius:10px; margin:10px; text-align:center">El correo o número de documento o teléfono ingresado ya está registrado!</div>
                             <% } %>
                         </form>
                     </div>
