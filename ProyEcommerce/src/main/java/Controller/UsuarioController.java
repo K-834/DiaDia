@@ -136,13 +136,22 @@ public class UsuarioController extends HttpServlet {
                 }
                 break;
             case "register-admin":
-                if(model.registrar(usuarioTipo, nombre, apellido, correo, passEncode, 1, documento, telefono)){
-                    request.getRequestDispatcher("admin/admin_usuarios.jsp").forward(request, response);
-                }
-                else{
-                    request.getRequestDispatcher("admin/admin_usuarios_agregar.jsp?invalid=true").forward(request, response);
-                }
-                break;
+            // para validar la contraseña 
+            String passPattern = "^(?=.*[A-Z])(?=.*[!@#$%^&*()_+={}\\[\\]:;\"'<>,.?/\\\\|`~]).{8,}$";
+            if (!pass.matches(passPattern)) {
+                request.setAttribute("errorMessage", "La contraseña debe tener al menos 8 caracteres, minimo una letra mayúscula y un símbolo.");
+                request.getRequestDispatcher("admin/admin_usuarios_agregar.jsp").forward(request, response);
+                return;
+            }
+
+            if (model.registrar(usuarioTipo, nombre, apellido, correo, passEncode, 1, documento, telefono)) {
+                request.getRequestDispatcher("admin/admin_usuarios.jsp").forward(request, response);
+            } else {
+                request.getRequestDispatcher("admin/admin_usuarios_agregar.jsp?invalid=true").forward(request, response);
+            }
+            break;
+
+
             case "editar-admin":
                 if(model.editarUsuario(Integer.parseInt(id), nombre, apellido, correo, documento, telefono)){
                     request.getRequestDispatcher("admin/admin_usuarios.jsp").forward(request, response);
