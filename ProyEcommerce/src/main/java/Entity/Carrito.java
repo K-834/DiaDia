@@ -44,12 +44,21 @@ public class Carrito {
     }
 
     public void sub(int idProducto) {
-        for(CarritoItem item : items) {
-            if(item.getId() == idProducto){
-                item.setCantidad(item.getCantidad() - 1);
+    for (int i = 0; i < items.size(); i++) {
+        CarritoItem item = items.get(i);
+        if (item.getId() == idProducto) {
+            int cantidadActual = item.getCantidad();
+            if (cantidadActual > 1) {
+                item.setCantidad(cantidadActual - 1);
+            } else {
+                // es para eliminar el producto cuando la cantidad llegue a 0
+                items.remove(i);
             }
+            break; 
         }
     }
+}
+
 
     public void remove(int idProducto) {
         for(int i = 0; i < items.size(); i++) {
