@@ -66,19 +66,39 @@ public class CategoriaModel {
     }
 
     public boolean agregarCategoria(String nombre, String descripcion) {
-        String sql = "INSERT INTO categoria (nombre, descripcion) VALUES(?, ?)";
-        try {
-            PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setString(1, nombre);
-            statement.setString(2, descripcion);
-            return statement.executeUpdate() > 0;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        }
+    // para verificar que no sea una ctageoria duplicada con el nombre
+    if (categoriaExiste(nombre)) {
+        return false; // Si existe, ya no se agrega
     }
+
+    String sql = "INSERT INTO categoria (nombre, descripcion) VALUES(?, ?)";
+    try {
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1, nombre);
+        statement.setString(2, descripcion);
+        return statement.executeUpdate() > 0;
+    } catch (SQLException e) {
+        e.printStackTrace();
+        return false;
+    }
+}
+
     
-    
+    public boolean categoriaExiste(String nombre) {
+    String sql = "SELECT COUNT(*) FROM categoria WHERE nombre = ?";
+    try {
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1, nombre);
+        ResultSet resultSet = statement.executeQuery();
+        if (resultSet.next()) {
+            return resultSet.getInt(1) > 0; // Si el conteo es mayor a 0, la categoría ya existe
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return false; 
+}
+
 
 
     public boolean editarCategoria(int id, String nombre, String descripcion) {
